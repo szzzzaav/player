@@ -1,0 +1,460 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  position: relative;
+  z-index: -100;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1200px;
+  min-height: 500px;
+  background: linear-gradient(45deg, #183e6c, #313d43);
+  transition: all 0.3s linear;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+svg {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  animation: rotate 2s linear infinite;
+  transform: scale(0.3);
+}
+
+.rightStage svg {
+  transform: scale(0.6);
+}
+
+svg circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 5;
+  stroke: #cdcdcd;
+  stroke-linecap: round;
+  transform: translate(2.5px, 2.5px);
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  animation: loading 4s linear infinite;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    stroke-dashoffset: 440;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  50.1% {
+    stroke-dashoffset: 880;
+  }
+}
+
+[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+[type="range"]::-webkit-slider-runnable-track {
+  background-color: transparent;
+}
+
+[type="range"]::-webkit-slider-container {
+  background-color: transparent;
+}
+
+[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e3e3e3;
+  cursor: pointer;
+}
+
+#root {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1200px;
+  min-height: 500px;
+}
+
+.bg {
+  position: fixed;
+  z-index: -99;
+  width: 3000px;
+  height: 3000px;
+  background: linear-gradient(45deg, #183e6c, #313d43);
+  animation: bg-rotate 5s ease-in-out infinite;
+  transition: all 0.3s ease-in-out;
+}
+@keyframes bg-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.shadow {
+  position: absolute;
+  z-index: -5;
+  width: 100vw;
+  height: 100vh;
+  min-width: 1200px;
+  min-height: 500px;
+  backdrop-filter: blur(1.7px);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.leftStage,
+.rightStage {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.leftStage {
+  width: 40vw;
+  height: 100vh;
+  min-width: 500px;
+  min-height: 500px;
+  justify-content: center;
+}
+
+.leftStage .songCoverContainer {
+  width: 400px;
+  height: 400px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 0.5px solid #333333;
+  -moz-box-shadow: 1px 2px 7px #333333;
+  -webkit-box-shadow: 1px 2px 7px #333333;
+  box-shadow: 1px 2px 7px #333333;
+}
+
+.leftStage .songCoverContainer .songCover {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
+
+@keyframes stage_appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.controllerBar {
+  display: flex;
+  width: 400px;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 15px 0;
+  animation: stage_appear 0.3s ease-in-out 1 forwards;
+}
+
+.songControl {
+  padding-bottom: 0;
+}
+
+.songDetails {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.songDetails .songName {
+  font-family: Ubuntu;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.songDetails .singer {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #cdcdcd;
+}
+
+.userOperateBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80px;
+}
+
+.volume,
+.songCurrentProgress,
+.songControllProgress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20px;
+}
+
+.volume .icon,
+.userOperateBar .icon {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.volume .volumeContainerWrapper,
+.songCurrentProgress .songCurrentProgressContainerWrapper,
+.songControllProgress .songControllProgressContainerWrapper {
+  width: 100%;
+}
+
+.volume .volumeContainer,
+.songCurrentProgress .songCurrentProgressContainer,
+.songControllProgress .songControllProgressContainer {
+  position: relative;
+  width: 100%;
+  height: 20px;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  color: #cdcdcd;
+  font-size: 11px;
+}
+
+.volume .volumeContainer {
+  padding-left: 5px;
+}
+
+.bgProgress,
+.volumeController,
+.songCurrentProgressController,
+.songControllProgressController {
+  position: absolute;
+  z-index: 99;
+  top: calc(50% - 1.5px);
+  width: 100%;
+  height: 3px;
+}
+
+.volume .bgProgress {
+  width: calc(100% - 5px);
+}
+
+.bgProgress {
+  background-color: #bcbbbb;
+  z-index: 98;
+  border-radius: 2px;
+}
+
+.colorProgress {
+  position: absolute;
+  z-index: 11;
+  height: inherit;
+  border-radius: inherit;
+  background-color: #ffffff;
+}
+
+.songOperates {
+  position: relative;
+}
+
+.songOperateBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.songOperateBar .icon {
+  font-weight: 600;
+  color: #e3e3e3;
+  cursor: pointer;
+}
+
+.songOperateBar .play,
+.songOperateBar .pause {
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.songOperateBar .prevWrapper,
+.songOperateBar .nextWrapper {
+  position: relative;
+}
+
+.songOperateBar .prevWrapper .first,
+.songOperateBar .prevWrapper .second,
+.songOperateBar .nextWrapper .first,
+.songOperateBar .nextWrapper .second {
+  position: absolute;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+}
+
+.songOperateBar .prevWrapper .first {
+  transform: rotate(180deg);
+}
+
+.songOperateBar .prevWrapper .second {
+  transform: rotate(180deg) translateX(-10px);
+}
+
+.songOperateBar .nextWrapper .first {
+  transform: translateX(-10px);
+}
+
+.colorsContainer {
+  position: absolute;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  left: 380px;
+  top: calc(50% - 15px);
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.418);
+  border-radius: 5px;
+}
+
+.colorsContainer .colors {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.colorsContainer .selected {
+  border: 2px solid white;
+}
+
+#blue {
+  background: linear-gradient(45deg, #183e6c, #313d43) !important;
+}
+
+#pink {
+  background: linear-gradient(45deg, #f875aa, #8fc3e3) !important;
+}
+
+#orange {
+  background: linear-gradient(45deg, #bc3e08, #7e1b0c) !important;
+}
+
+/* 歌词部分 */
+.rightStage {
+  width: 60vw;
+  height: 100vh;
+  min-width: 700px;
+  min-height: 500px;
+}
+
+.lyric_bar {
+  position: absolute;
+  width: 54vw;
+  height: 88vh;
+  min-width: 630px;
+  min-height: 450px;
+  overflow: hidden;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: stage_appear 0.3s ease-in-out 1 forwards;
+}
+
+.lyric_bar .lyric_el {
+  display: block;
+  position: relative;
+  z-index: -6;
+  min-width: 600px;
+  height: auto;
+  min-height: 90px;
+  color: rgb(212, 212, 212);
+  line-height: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.visualStage {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 400px;
+  height: 3px;
+  left: calc(50% - 200px);
+  top: calc(50% - 1.5px);
+  background-color: #f875aa;
+  backdrop-filter: blur(1px);
+}
+
+.visualStage .stageEl {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background-color: #cdcdcd;
+  border: none;
+}
+
+.lyric_bar .active {
+  z-index: 10;
+  font-size: 2.8rem;
+  color: #ffffff;
+  transform: translateX(1px);
+  line-height: 2.8rem;
+}
+
+@keyframes scrollAnimation {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-40px);
+  }
+}
+
+.scroll-animation {
+  animation: scrollAnimation 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+.hidden {
+  display: none !important;
+}
